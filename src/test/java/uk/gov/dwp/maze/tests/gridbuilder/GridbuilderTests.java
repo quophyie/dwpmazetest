@@ -123,5 +123,33 @@ public class GridbuilderTests {
     gridBuilder.buildGrid(gridLines);
   }
 
+  @Test
+  public void shouldThrowGridExceptionGivenGridWithStartPoint() {
+    gridLines.clear();
+    gridLines.add("XXXXXXXXXXXX X");
+    gridLines.add("X            X");
+    gridLines.add("XFXXXXXXXXXXXX");
+
+    String message = "grid does not contain a start point. grid must contain a single start point";
+    thrown.expect(GridException.class);
+    thrown.expectMessage(message);
+
+    gridBuilder.buildGrid(gridLines);
+  }
+
+  @Test
+  public void shouldThrowGridExceptionGivenGridWithFinishPoint() {
+    gridLines.clear();
+    gridLines.add("XXXXXXXXXXXXSX");
+    gridLines.add("X            X");
+    gridLines.add("XXXXXXXXXXXXXX");
+
+    String message = "grid does not contain a finish point. grid must contain a single finish point";
+    thrown.expect(GridException.class);
+    thrown.expectMessage(message);
+
+    gridBuilder.buildGrid(gridLines);
+  }
+
 
 }

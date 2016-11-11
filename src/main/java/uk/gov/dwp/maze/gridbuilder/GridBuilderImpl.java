@@ -35,6 +35,7 @@ public class GridBuilderImpl implements GridBuilder {
 
     for (String line: mazeFileLines) {
       Character[] lineAsCharacterArray = ArrayUtils.toObject(line.toCharArray());
+
       for(int colNum = 0; colNum < lineAsCharacterArray.length; colNum ++){
 
         String characterInLine  = lineAsCharacterArray[colNum].toString();
@@ -60,9 +61,13 @@ public class GridBuilderImpl implements GridBuilder {
             numOfFinishPositionsCreated++;
           }
      }
-
       rowNum++;
     }
+
+    if (numOfStartPositionsCreated == 0 )
+      throw new GridException("grid does not contain a start point. grid must contain a single start point");
+    else if (numOfFinishPositionsCreated == 0 )
+      throw new GridException("grid does not contain a finish point. grid must contain a single finish point");
 
     GridResult gridResult = new GridResult(grid, startLocation, finishLocation, numOfSpaces, numOfWalls);
     return gridResult;
